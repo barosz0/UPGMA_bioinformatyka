@@ -1,3 +1,4 @@
+from distutils.spawn import spawn
 import UPGMA
 
 
@@ -37,14 +38,35 @@ def load(path):
         
     return tab
 
+def loadMatrix(path, separator = ","):
+    with open(path,"r") as f:
+        lines = f.readlines();
+
+    dane = []
+
+    for l in lines:
+        l = l.replace("\n","")
+        pom = []
+        for i in l.split(separator):
+            pom.append(int(i))
+        
+        
+
+        dane.append(pom)
+    
+    return dane
+
 
 def main():
-    mat = load("dane2.txt")
+    file = "daneM8.txt"
+    #mat = load("dane2.txt")
+    mat = loadMatrix("dane\\"+file)
 
+    print(mat)
     print("Wczytano:")
     UPGMA.print_matrix(mat)
 
-    UPGMA.make_tree(mat,"abcde")
+    UPGMA.make_tree(mat)
 
 if __name__ == "__main__":
     main()

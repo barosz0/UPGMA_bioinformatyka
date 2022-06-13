@@ -1,6 +1,4 @@
 import os
-from turtle import tracer
-from unicodedata import name
 from pygraphviz import AGraph
 
 
@@ -108,9 +106,11 @@ def merge_nodes(n1,n2,nodes,mat):
 
     
     dist1 = mat[n1][n2]/2 - new_node.child[0].get_height()
+    dist1 = round(dist1,2)
     new_node.dist.append(dist1)
 
     dist2 = mat[n1][n2]/2 - new_node.child[1].get_height()
+    dist2 = round(dist2,2)
     new_node.dist.append(dist2)
 
 
@@ -146,7 +146,9 @@ def merge_nodes(n1,n2,nodes,mat):
     for l in mat:
         l.pop(n2)
 
-def make_tree(mat, names = None):
+
+
+def make_tree(mat, names = None, file = "tree.png"):
     print("Zaczynam")
     nodes = []
 
@@ -179,7 +181,7 @@ def make_tree(mat, names = None):
 
 
     G.layout(prog='dot')
-    G.draw("tree.png")  
+    G.draw(file)  
 
 
 
